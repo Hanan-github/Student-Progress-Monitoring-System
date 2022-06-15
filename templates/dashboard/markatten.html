@@ -1,0 +1,130 @@
+{% extends 'dashboard/dashboardbase.html' %}
+{% load static %}
+
+{% block title %}Mark Attendence{% endblock title %}
+{% block MarkAttendenceActive %}active{% endblock MarkAttendenceActive %}
+
+{% block body %}
+<div class="container">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-block">
+                    <img src="{% static 'assets\img\undraw_checking_boxes_re_9h8m.svg' %}"
+                    width="500" height="500"/>
+                    
+                </div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Mark Attendence!</h1>
+                        </div>
+                        <form class="user" action="/dashboard/uploadattendence" method="post">
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="number" class="form-control form-control-user" id="rollnum" name="rollnum"
+                                        placeholder="Roll No." Required min="1">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input list="list-class" id="class" name="class" class="form-control form-control-user" placeholder="Class" Required/>
+
+                                        <datalist id="list-class">
+                                            <option value="1"></option>
+                                            <option value="2"></option>
+                                            <option value="3"></option>
+                                            <option value="4"></option>
+                                            <option value="5"></option>
+                                            <option value="6"></option>
+                                            <option value="7"></option>
+                                            <option value="8"></option>
+                                            <option value="9"></option>
+                                            <option value="10"></option>
+                                        </datalist>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0 mx-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="true" id="monday" name="monday">
+                                        <label class="form-check-label" for="monday">
+                                          Monday
+                                        </label>
+                                      </div>
+                                </div>
+                                <div class="col-sm-6">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0 mx-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="true" id="tuesday" name="tuesday">
+                                        <label class="form-check-label" for="tuesday">
+                                          Tuesday
+                                        </label>
+                                      </div>
+                                </div>
+                                <div class="col-sm-6">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0 mx-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="true" id="wednesday" name="wednesday">
+                                        <label class="form-check-label" for="wednesday">
+                                          Wednesday
+                                        </label>
+                                      </div>
+                                </div>
+                                <div class="col-sm-6">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0 mx-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="true" id="thursday" name="thursday">
+                                        <label class="form-check-label" for="thursday">
+                                          Thursday
+                                        </label>
+                                      </div>
+                                </div>
+                                <div class="col-sm-6">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0 mx-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="true" id="friday" name="friday">
+                                        <label class="form-check-label" for="friday">
+                                          Friday
+                                        </label>
+                                      </div>
+                                </div>
+                                <div class="col-sm-6">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0 mx-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="true" id="saturday" name="saturday">
+                                        <label class="form-check-label" for="saturday">
+                                          Saturday
+                                        </label>
+                                      </div>
+                                </div>
+                                <div class="col-sm-6">
+                                </div>
+                            </div>
+                            
+                            
+                            <button type="submit" class="btn btn-primary btn-user btn-block">Save</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock body %}

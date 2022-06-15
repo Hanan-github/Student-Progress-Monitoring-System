@@ -1,0 +1,50 @@
+{% extends 'home/homebase.html' %}
+{% load static %}
+
+{% block body %}
+    
+     <!-- ======= Contact Section ======= -->
+     <section class="contact">
+
+        <div class="container" data-aos="fade-up">
+  
+          <header class="section-header">
+            <p>Login Here</p>
+          </header>
+  
+          <div class="row gy-4">
+  
+            <div class="col-lg-6">
+              <img src="{% static 'assets/img/undraw_online_ad_re_ol62.svg' %}" class="img-fluid" alt="">
+  
+  
+            </div>
+  
+            <div class="col-lg-6">
+                <form action="/login" method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                      <label for="loginemail" class="form-label">Email address</label>
+                      <input type="email" class="form-control" id="loginemail" name="loginemail" placeholder="name@example.com" Required>
+                      <label></label>
+                    </div>
+    
+                    <div class="mb-3">
+                      <label for="pass" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="loginpass" name="loginpass" placeholder="Enter your password" Required>
+                      <label></label>
+                    </div>
+                    <div class="col-md-12 text-center">
+                    <button type="submit" class="btn btn-primary text-center">Submit</button>
+                    </div>
+                  </form>
+  
+            </div>
+  
+          </div>
+  
+        </div>
+  
+      </section><!-- End Contact Section -->
+
+{% endblock body %}

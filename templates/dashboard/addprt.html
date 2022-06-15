@@ -1,0 +1,64 @@
+{% extends 'dashboard/dashboardbase.html' %}
+{% load static %}
+
+{% block title %}Add Parents{% endblock title %}
+{% block ManageAndDeleteParentActive %}active{% endblock ManageAndDeleteParentActive %}
+
+{% block body %}
+<div class="container">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-block">
+                    <img src={% static 'assets/img/undraw_back_to_school_inwc.svg' %}
+                    width="600" height="500"/>
+                    
+                </div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Add Parents!</h1>
+                        </div>
+                        <form class="user" action='/dashboard/parentreg' method='post'>
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="text" id="pname" name="pname" placeholder="Parent Name" class="form-control form-control-user" Required />
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control form-control-user" id="address" name="address"
+                                        placeholder="Address" Required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="number" id="contact" name="contact" placeholder="Contact" class="form-control form-control-user" min='0'  Required/>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="number" class="form-control form-control-user" id="cnic" name="cnic"
+                                        placeholder="CNIC" min='0' Required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" placeholder="Email Address" class="form-control form-control-user" Required />
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="password" id="pass1" name="pass1" placeholder="Password" class="form-control form-control-user" Required />
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="password" id="pass2" name="pass2" placeholder="Confirm Password" class="form-control form-control-user" Required />
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-user btn-block">Add</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock body %}

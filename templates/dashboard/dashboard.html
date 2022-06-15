@@ -1,0 +1,103 @@
+{% extends 'dashboard/dashboardbase.html' %}
+{% load static %}
+
+{% block DashboardActive %}active{% endblock DashboardActive %}
+{% block body %}
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Classes</h1>
+        {% if request.user.is_school %}
+    <div class="text-right">
+        <button type="button" class="btn btn-primary text-center" data-toggle="modal" data-target="#addclasses">Add Classes</button>
+    </div>
+    {% endif %}
+    </div>
+
+    {% for class in classes  %}
+    <div class="col-lg-6 mx-auto">
+
+        <!-- Dropdown Card Example -->
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Class {{class.class_no}}</h6>
+                {% if request.user.is_school %}
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                        aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-header">Actions:</div>
+                        <a class="dropdown-item" href="{% url 'deleteclass' Id=class.id %}">Delete</a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{class.class_title}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <a href="{% url 'classdetails' Id=class.id %}" class="btn btn-primary btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                            <span class="text">View</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+    
+
+
+
+
+
+
+
+
+    <!-- Logout Modal-->
+<div class="modal fade" id="addclasses" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="ModalLabel">Add Class Here</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            
+            <form class="user" action="addclass" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="form-control form-control-user"
+                        id="title" name="title" placeholder="Class title (Optional)">
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control form-control-user"
+                        id="class" name="class" placeholder="Class" Required min='1' max='12'>
+                </div>
+                
+
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">add</button>
+        </div>
+    </div>
+</div>
+</div>
+
+       
+
+{% endblock body %}

@@ -1,0 +1,82 @@
+{% extends 'dashboard/dashboardbase.html' %}
+{% load static %}
+
+{% block title %}Upload Tests{% endblock title %}
+{% block UploadTestActive %}active{% endblock UploadTestActive %}
+
+{% block body %}
+<div class="container">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-block">
+                    <img src="{% static 'assets\img\undraw_true_friends_c-94-g.svg' %}"
+                    width="600" height="500"/>
+                    
+                </div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Add Tests!</h1>
+                        </div>
+                        <form class="user" action="/dashboard/savetest" method="post">
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input list="list-class" id="class" name="class" class="form-control form-control-user" placeholder="For Class" Required/>
+
+                                        <datalist id="list-class">
+                                            <option value="1"></option>
+                                            <option value="2"></option>
+                                            <option value="3"></option>
+                                            <option value="4"></option>
+                                            <option value="5"></option>
+                                            <option value="6"></option>
+                                            <option value="7"></option>
+                                            <option value="8"></option>
+                                            <option value="9"></option>
+                                            <option value="10"></option>
+                                            <option value="11"></option>
+                                            <option value="12"></option>
+                                        </datalist>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input list="list-subject" id="sibject" name="subject" class="form-control form-control-user" placeholder="Subject" Required/>
+
+                                        <datalist id="list-subject">
+                                            <option value="Urdu"></option>
+                                            <option value="English"></option>
+                                            <option value="Maths"></option>
+                                            <option value="Physics"></option>
+                                            <option value="Chemistry"></option>
+                                            <option value="Bio"></option>
+                                            <option value="Computer"></option>
+                                            <option value="Pak-Studies"></option>
+                                            <option value="Science"></option>
+                                            <option value="Islamiyat"></option>
+                                            <option value="Arabic"></option>
+                                        </datalist>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0 mx-auto">
+                                    <input type="date" class="form-control form-control-user"
+                                        id="testdate" name="testdate" placeholder="Date" Required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <textarea name="description" class="form-control" id="description" cols="20" rows="6" placeholder=" Test Details" Required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-user btn-block">Add</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock body %}

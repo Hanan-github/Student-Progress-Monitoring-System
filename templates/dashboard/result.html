@@ -1,0 +1,144 @@
+{% extends 'dashboard/dashboardbase.html' %}
+{% load static %}
+
+{% block DashboardActive %}active{% endblock DashboardActive %}
+
+{% block body %}
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Results: &emsp; {{student.name}} ({{student.roll_number}})</h1>
+</div>
+
+
+{% for object in results %}
+<div class="col-lg-7 mx-auto">
+    <!-- Collapsable Card Example -->
+    <div class="card shadow mb-4">
+        <!-- Card Header - Accordion -->
+        <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button"
+            aria-expanded="true" aria-controls="collapseCardExample">
+            <h6 class="m-0 font-weight-bold text-primary">{{object.date}}</h6>
+        </a>
+        <!-- Card Content - Collapse -->
+        <div class="collapse show" id="collapseCardExample">
+            <div class="card-body">
+
+                <div class="card shadow mb-4">
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Subject</th>
+                                        <th>Obtained Marks</th>
+                                        <th>Total Marks</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% if object.urdu_obtained is not None %}
+                                    <tr>
+                                        <th>Urdu</th>
+                                        <td>{{object.urdu_obtained}}</td>
+                                        <td>{{object.urdu_total}}</td>
+                                    </tr>
+                                    {% endif %}
+                                    {% if object.english_obtained is not None %}
+                                    <tr>
+                                        <th>English</th>
+                                        <td>{{object.english_obtained}}</td>
+                                        <td>{{object.english_total}}</td>
+                                    </tr>
+                                    {% endif %}
+                                    {% if object.maths_obtained is not None %}
+                                    <tr>
+                                        <th>Mathematics</th>
+                                        <td>{{object.maths_obtained}}</td>
+                                        <td>{{object.maths_total}}</td>
+                                    </tr>
+                                    {% endif %}
+                                    {% if object.physics_obtained is not None %}
+                                    <tr>
+                                        <th>Physics</th>
+                                        <td>{{object.physics_obtained}}</td>
+                                        <td>{{object.physics_total}}</td>
+                                    </tr>
+                                    {% endif %}
+                                    {% if object.chemistry_obtained is not None %}
+                                    <tr>
+                                        <th>Chemistry</th>
+                                        <td>{{object.chemistry_obtained}}</td>
+                                        <td>{{object.chemistry_total}}</td>
+                                    </tr>
+                                    {% endif %}
+                                    {% if object.bio_obtained is not None %}
+                                    <tr>
+                                        <th>Bio</th>
+                                        <td>{{object.bio_obtained}}</td>
+                                        <td>{{object.bio_total}}</td>
+                                    </tr>
+                                    {% endif %}
+                                    {% if object.computer_obtained is not None %}
+                                    <tr>
+                                        <th>Computer</th>
+                                        <td>{{object.computer_obtained}}</td>
+                                        <td>{{object.computer_total}}</td>
+                                    </tr>
+                                    {% endif %}
+                                    {% if object.pakstudies_obtained is not None %}
+                                    <tr>
+                                        <th>Pak.Studies</th>
+                                        <td>{{object.pakstudies_obtained}}</td>
+                                        <td>{{object.pakstudies_total}}</td>
+                                    </tr>
+                                    {% endif %}
+                                    {% if object.islamiyat_obtained is not None %}
+                                    <tr>
+                                        <th>Islmaiyat</th>
+                                        <td>{{object.islamiyat_obtained}}</td>
+                                        <td>{{object.islamiyat_total}}</td>
+                                    </tr>
+                                    {% endif %}
+                                    {% if object.science_obtained is not None %}
+                                    <tr>
+                                        <th>Science</th>
+                                        <td>{{object.science_obtained}}</td>
+                                        <td>{{object.science_total}}</td>
+                                    </tr>
+                                    {% endif %}
+                                    {% if object.arabic_obtained is not None %}
+                                    <tr>
+                                        <th>Arabic</th>
+                                        <td>{{object.arabic_obtained}}</td>
+                                        <td>{{object.arabic_total}}</td>
+                                    </tr>
+                                    {% endif %}
+                                    {% if object.total_obtained is not None %}
+                                    <tr>
+                                        <th>Grand Total</th>
+                                        <td>{{object.total_obtained}}</td>
+                                        <td>{{object.total_marks}}</td>
+                                    </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                            {% if request.user.is_school %}
+                            <div class="col-md-12 text-center">
+                                <a href="{% url 'deleteresult' Id=object.id %}"
+                                    class="btn btn-danger text-center">Delete</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+
+{% endblock body %}

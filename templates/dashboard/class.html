@@ -1,0 +1,60 @@
+{% extends 'dashboard/dashboardbase.html' %}
+{% load static %}
+
+{% block DashboardActive %}active{% endblock DashboardActive %}
+
+{% block body %}
+        <!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Events</h1>
+    <div class="text-right">
+        <a href="{% url 'upcomingtest' Id=classid %}"><button type="button" class="btn btn-primary text-center">Upcoming Tests</button></a>
+    </div>
+</div>
+        
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Class 1</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Roll No.</th>
+                                <th>Age</th>
+                                <th>DOB</th>
+                                <th>Gender</th>
+                                <th>Father's CNIC</th>
+                                <th>Attendence</th>
+                                <th>Results</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            {% for student in students %}
+                            <tr>
+                                <td>{{student.name}}</td>                            
+                                <td>{{student.roll_number}}</td>                            
+                                <td>{{student.age}}</td>                            
+                                <td>{{student.dob}}</td>                            
+                                <td>{{student.gender}}</td>                            
+                                <td>{{student.father_cnic}}</td>
+                                <td>
+                                    <a href="{% url 'attendence' Id=student.id %}">View</a>
+                                </td>
+                                <td>
+                                    <a href="{% url 'result' Id=student.id %}">View</a>
+                                </td>
+                            </tr>
+                            {% endfor %}                        
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    
+{% endblock body %}

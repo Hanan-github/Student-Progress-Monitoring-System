@@ -1,0 +1,55 @@
+{% extends 'dashboard/dashboardbase.html' %}
+{% load static %}
+
+{% block DashboardActive %}active{% endblock DashboardActive %}
+{% block body %}
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Attendence: &emsp; {{student.name}} ({{student.roll_number}}) </h1>
+    </div>
+
+    <!-- DataTales Example -->
+    {% for object in attendence %}
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">{{object.Date}}</h6>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                            <th>Saturday</th>
+                            <th>Sunday</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <tr>
+                            <td>{{object.Monday}}</td>
+                            <td>{{object.Tuesday}}</td>
+                            <td>{{object.Wednesday}}</td>
+                            <td>{{object.Thursday}}</td>
+                            <td>{{object.Friday}}</td>
+                            <td>{{object.Saturday}}</td>
+                            <td>Holiday</td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% if request.user.is_school %}
+                <div class="col-md-12 text-center">
+                    <a href="{% url 'deleteattendence' Id=object.id %}" class="btn btn-danger text-center">Delete</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock body %}

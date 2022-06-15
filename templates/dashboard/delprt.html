@@ -1,0 +1,51 @@
+{% extends 'dashboard/dashboardbase.html' %}
+{% load static %}
+
+{% block title %}Delete parents{% endblock title %}
+{% block ManageAndDeleteParentActive %}active{% endblock ManageAndDeleteParentActive %}
+
+{% block body %}
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Manage Parents</h1>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Parents</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Contact</th>
+                            <th>Address</th>
+                            <th>CNIC</th>
+                            <th>DELETE</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        {% for parent in parentdata %}
+                        <tr>
+                            <td>{{parent.parent_name}}</td>
+                            <td>{{parent.account.email}}</td>
+                            <td>{{parent.contact}}</td>
+                            <td>{{parent.address}}</td>
+                            <td>{{parent.cnic}}</td>
+                            <td>
+                                <a href="{% url 'deleteparent' Email=parent.email %}" class="link-danger">
+                                    Delete
+                                </a>
+                            </td>                            
+                        </tr>
+                        {% endfor %}                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}

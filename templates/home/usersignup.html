@@ -1,0 +1,71 @@
+{% extends 'home/homebase.html' %}
+{% load static %}
+
+{% block body %}
+    
+     <section class="contact">
+
+        <div class="container" data-aos="fade-up">
+  
+          <header class="section-header">
+            <p>Signup Here</p>
+          </header>
+  
+          <div class="row gy-4">
+  
+            <div class="col-lg-6">
+              <img src="{% static 'assets/img/undraw_real_time_sync_re_nky7.svg' %}" class="img-fluid" alt="">
+  
+  
+            </div>
+  
+            <div class="col-lg-6">
+              <form action='/signup' method='post'>
+                <div class="row gy-4">
+                
+                <div class="mb-3">
+                  <label for="schoolname" class="form-label">School Name</label>
+                  <input type="text" class="form-control" id="schoolname" name="schoolname" placeholder="Enter your school name" Required>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="contact" class="form-label">Contact</label>
+                  <input type="number" class="form-control" id="contact" name="contact" placeholder="Enter Contact No." Required>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="address" class="form-label">Address</label>
+                  <input type="text" class="form-control" id="address" name="address" placeholder="Enter your address" Required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" Required>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="pass1" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Enter your password" Required>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="pass2" class="form-label">Confirm Password</label>
+                  <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Enter your password again" Required>
+                </div>
+                
+                {% csrf_token %}
+                <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+              </div>
+  
+            </div>
+  
+          </div>
+  
+        </div>
+  
+      </section>
+
+{% endblock body %}
