@@ -45,6 +45,7 @@ class Account(AbstractBaseUser):
     is_superuser    = models.BooleanField(default=False)
     is_school       = models.BooleanField(default=False)
     is_parent       = models.BooleanField(default=False)
+    registration_no = models.IntegerField(unique=True, null=True)
 
     objects = myAccountManager()
 

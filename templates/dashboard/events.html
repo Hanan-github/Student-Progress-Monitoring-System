@@ -17,16 +17,35 @@
 </div>
 
 {% for event in events  %}
+
 <div class="col-lg-7 mx-auto">
     <!-- Collapsable Card Example -->
     <div class="card shadow mb-4">
         <!-- Card Header - Accordion -->
-        <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
+        {% if forloop.counter == 1 or forloop.counter == 4 or forloop.counter == 7 or forloop.counter == 10 %}
+        <a href="#collapseCardExample" class="d-block card-header py-3 p-3 bg-success" data-toggle="collapse"
             role="button" aria-expanded="true" aria-controls="collapseCardExample">
-            <h6 class="m-0 font-weight-bold text-primary">{{event.title}}</h6>
+            <h6 class="m-0 font-weight-bold text-white">{{event.title}}</h6>
         </a>
+        {% endif %}
+        
+        {% if forloop.counter == 2 or forloop.counter == 5 or forloop.counter == 8 or forloop.counter == 11 %}
+        <a href="#collapseCardExample" class="d-block card-header py-3 p-3 bg-danger" data-toggle="collapse"
+            role="button" aria-expanded="true" aria-controls="collapseCardExample">
+            <h6 class="m-0 font-weight-bold text-white">{{event.title}}</h6>
+        </a>
+        {% endif %}
+        
+        {% if forloop.counter == 3 or forloop.counter == 6 or forloop.counter == 9 or forloop.counter == 12 %}
+        <a href="#collapseCardExample" class="d-block card-header py-3 p-3 bg-warning" data-toggle="collapse"
+            role="button" aria-expanded="true" aria-controls="collapseCardExample">
+            <h6 class="m-0 font-weight-bold text-white">{{event.title}}</h6>
+        </a>
+        {% endif %}
+        
+        
         <!-- Card Content - Collapse -->
-        <div class="collapse show" id="collapseCardExample">
+        <div class="collapse show " id="collapseCardExample">
             <div class="card-body">
                 {{event.description}}
                 {% if request.user.is_school %}
@@ -43,7 +62,7 @@
 {% endfor %}
 
 
-<!-- Logout Modal-->
+<!-- Event modal-->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 aria-hidden="true">
 <div class="modal-dialog" role="document">

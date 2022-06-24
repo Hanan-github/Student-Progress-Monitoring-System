@@ -23,14 +23,19 @@
               <form action='/signup' method='post'>
                 <div class="row gy-4">
                 
-                <div class="mb-3">
+                <div class="col-md-6">
                   <label for="schoolname" class="form-label">School Name</label>
                   <input type="text" class="form-control" id="schoolname" name="schoolname" placeholder="Enter your school name" Required>
                 </div>
 
                 <div class="col-md-6">
+                  <label for="email" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" Required>
+                </div>
+
+                <div class="col-md-6">
                   <label for="contact" class="form-label">Contact</label>
-                  <input type="number" class="form-control" id="contact" name="contact" placeholder="Enter Contact No." Required>
+                  <input type="number" class="form-control" id="contact" name="contact" placeholder="Enter Contact No." Required min='0'>
                 </div>
 
                 <div class="col-md-6">
@@ -39,8 +44,8 @@
                 </div>
 
                 <div class="mb-3">
-                  <label for="email" class="form-label">Email address</label>
-                  <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" Required>
+                  <label for="regno" class="form-label">Registration No.</label>
+                  <input type="text" class="form-control" id="regno" name="regno" placeholder="Enter your school's registraion no." Required>
                 </div>
 
                 <div class="col-md-6">
@@ -57,7 +62,7 @@
                 <div class="col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-              </form>
+                </form>
               </div>
   
             </div>

@@ -37,6 +37,10 @@
                     <div class="col-md-12 text-center">
                     <button type="submit" class="btn btn-primary text-center">Submit</button>
                     </div>
+                    <hr>
+                <div class="text-center">
+                  <a href="#test" data-toggle="modal" data-target="#test" class="more-link">Forgot Password?</a>
+                </div>
                   </form>
   
             </div>
@@ -46,5 +50,45 @@
         </div>
   
       </section><!-- End Contact Section -->
+
+      <div class="modal fade" id="test" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Change Password</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  
+                  <form class="user" action="/forgotpassword" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="email" class="form-label">Email address</label>
+                      <input type="email" class="form-control form-control-user"
+                          id="email" name="email" Required>
+                    </div>
+                    <div class="form-group">
+                      <label for="regno" class="form-label">Registration No.</label>
+                      <input type="text" class="form-control" id="regno" name="regno" Required>
+                    </div>
+                    <div class="form-group">
+                      <label for="pass1" class="form-label">Change Password</label>
+                      <input type="password" class="form-control" id="pass1" name="pass1" Required>
+                    </div>
+                    <div class="form-group">
+                      <label for="pass2" class="form-label">Confirm Password</label>
+                      <input type="password" class="form-control" id="pass2" name="pass2" Required>
+                    </div>
+                    
+
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock body %}

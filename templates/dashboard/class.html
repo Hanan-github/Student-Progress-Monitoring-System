@@ -6,7 +6,7 @@
 {% block body %}
         <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Events</h1>
+    <h1 class="h3 mb-0 text-gray-800">Classes</h1>
     <div class="text-right">
         <a href="{% url 'upcomingtest' Id=classid %}"><button type="button" class="btn btn-primary text-center">Upcoming Tests</button></a>
     </div>
@@ -28,7 +28,9 @@
                                 <th>Age</th>
                                 <th>DOB</th>
                                 <th>Gender</th>
+                                {% if request.user.is_school %}
                                 <th>Father's CNIC</th>
+                                {% endif %}
                                 <th>Attendence</th>
                                 <th>Results</th>
                             </tr>
@@ -41,8 +43,10 @@
                                 <td>{{student.roll_number}}</td>                            
                                 <td>{{student.age}}</td>                            
                                 <td>{{student.dob}}</td>                            
-                                <td>{{student.gender}}</td>                            
+                                <td>{{student.gender}}</td>
+                                {% if request.user.is_school %}
                                 <td>{{student.father_cnic}}</td>
+                                {% endif %}
                                 <td>
                                     <a href="{% url 'attendence' Id=student.id %}">View</a>
                                 </td>

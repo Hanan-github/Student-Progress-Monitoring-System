@@ -1,11 +1,12 @@
 # import email
 # from email import message
+import email
 from django.shortcuts import render, HttpResponse, redirect
 from dashboard.models import School
 from home.models import Contact
 from account.models import Account
 from dashboard.models import School
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login
 from django.contrib import messages
 
 # Create your views here.
@@ -17,9 +18,10 @@ def handlesignup(request):
     if request.method=="POST":
         # get the post parameters
         username = request.POST['schoolname']
+        email = request.POST['email']
         contact = request.POST['contact']
         address = request.POST['address']
-        email = request.POST['email']
+        regno = request.POST['regno']
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
 
@@ -32,16 +34,24 @@ def handlesignup(request):
             messages.warning(request, "username must be under 10 characters!")
             return redirect('/usersignup')
 
+        if Account.objects.filter(email=email).exists():
+            messages.warning(request, 'Email already exists!')
+            return redirect('/usersignup')
+
         if not username.isalnum():
             messages.warning(request, 'Username must only contain alphabets or numbers!')
+            return redirect('/usersignup')
+
+        if not contact.isdigit():
+            messages.warning(request, 'Contact no. must only contain numbers!')
             return redirect('/usersignup')
 
         if not address.isalnum():
             messages.warning(request, 'Address must only contain alphabets or numbers!')
             return redirect('/usersignup')
 
-        if Account.objects.filter(email=email).exists():
-            messages.warning(request, 'Email already exists!')
+        if not regno.isalnum():
+            messages.warning(request, 'Registarion No. must only contain numbers!')
             return redirect('/usersignup')
 
         if len(pass1) < 6:
@@ -54,6 +64,7 @@ def handlesignup(request):
      
         myuser = Account.objects.create_user(email, username, pass1)
         myuser.is_school = True
+        myuser.registration_no = regno
         myuser.save()
 
         account = myuser
@@ -102,13 +113,37 @@ def contact(request):
 
     return redirect('/')
 
+def forgotpassword(request):
+    if request.method == 'POST':
+        email           = request.POST['email']
+        regno           = request.POST['regno']
+        pass1           = request.POST['pass1']
+        pass2           = request.POST['pass2']
+
+        if not Account.objects.filter(email=email):
+            messages.warning(request, 'Email does not exists')
+            return redirect('/userlogin')
+        
+        if not Account.objects.filter(registration_no=regno):
+            messages.warning(request, 'Invalid registration no.')
+            return redirect('/userlogin')
+
+        if len(pass1) < 8:
+            messages.warning(request, 'Password must contain atleast 8 characters')
+            return redirect('/userlogin')
+
+        if pass1 != pass2:
+            messages.warning('password do not match')
+            return redirect('/userlogin')
+
+        myuser          = Account.objects.get(email=email, registration_no=regno)
+        myuser.set_password(pass1)
+        myuser.save()
+        messages.success(request, 'Password has been changed succesfully')
+        return redirect('/userlogin')  
+        
 
 
-
-def test(request):
-    return render(request, 'home/test.html')
-def testb(request):
-    return render(request, 'home/testb.html')
 
 
 

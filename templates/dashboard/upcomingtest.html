@@ -8,6 +8,9 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Upcoming Tests</h1>
+    <div class="text-right">
+        <a href="{% url 'classdetails' Id=classid %}"><button type="button" class="btn btn-primary text-center">Go Back</button></a>
+    </div>
 </div>
 
 {% for test in tests  %}
@@ -25,7 +28,7 @@
                 {{test.description}}
                 
                 <hr>
-                <h6 class="m-0 font-weight-bold text-primary">Dated: {{test.date}}</h6>
+                <h6 class="m-0 font-weight-bold text-dark">Dated: {{test.date}}</h6>
                 {% if request.user.is_school %}
                 <a href="{% url 'deletetest' Id=test.id %}">
                 <button type="button" class="close mx-2 my-3"  aria-label="Close">

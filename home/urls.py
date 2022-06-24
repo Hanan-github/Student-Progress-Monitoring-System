@@ -10,9 +10,8 @@ urlpatterns = [
     path('usersignup/', views.usersignup, name='usersignup'),
     path('contact/', views.contact, name='contact'),
 
-
-    path('test/', views.test, name='test'),
-    path('testb/', views.testb, name='testb'),
+    #for forgot passwrod
+    path('forgotpassword', views.forgotpassword, name='forgotpassword'),
 
     #for 404 page
     path('404-not-found', views.notfound, name='notfound'),

@@ -84,6 +84,10 @@ def handleparentreg(request):
         pass2 = request.POST['pass2']
 
         #checks for errors
+        if not all(x.isalpha() or x.isspace() for x in username):
+            messages.warning(request, 'Invalid username!')
+            return redirect('/dashboard/addprt')
+
         if not address.isalnum():
             messages.warning(request, 'Address must only contain alphabets or numbers!')
             return redirect('/dashboard/addprt')
@@ -120,9 +124,7 @@ def handleparentreg(request):
         myparent.save()
         
         if Student.objects.filter(father_cnic=cnic).exists():
-            student      = Student.objects.get(father_cnic=cnic)
-            student.parent = myparent
-            student.save()
+            student      = Student.objects.filter(father_cnic=cnic).update(parent=myparent)
 
 
         messages.success(request, "Parent has been added successfully")
@@ -150,7 +152,8 @@ def handlestudentreg(request):
         school          = request.user.school
 
         #checks for errors
-        if not studentname.isalpha():
+        # if not studentname.isalpha():
+        if not all(x.isalpha() or x.isspace() for x in studentname):
             messages.warning(request, 'Invalid student name')
             return redirect('/dashboard/addstd')
 
@@ -203,110 +206,6 @@ def handlelogout(request):
 
 
 
-# #For Classes
-# def classOne(request):
-#     if request.user.is_authenticated:
-#         if request.user.is_school:
-#             studentdata = Student.objects.filter(school=request.user.school, student_class=1).order_by('roll_number')
-#         if request.user.is_parent:
-#             studentdata = Student.objects.filter(school=request.user.parent.school, student_class=1).order_by('roll_number')
-#         return render(request, 'dashboard/classes/class1.html', {'studentdata' : studentdata})
-
-#     else:
-#         return redirect('notfound')
-
-# def classTwo(request):
-#     if request.user.is_authenticated:
-#         if request.user.is_school:
-#             studentdata = Student.objects.filter(school=request.user.school, student_class=2).order_by('roll_number')
-#         if request.user.is_parent:
-#             studentdata = Student.objects.filter(school=request.user.parent.school, student_class=2).order_by('roll_number')
-#         return render(request, 'dashboard/classes/class2.html', {'studentdata' : studentdata})
-
-#     else:
-#         return redirect('notfound') 
-    
-
-# def classThree(request):
-#     if request.user.is_authenticated:
-#         if request.user.is_school:
-#             studentdata = Student.objects.filter(school=request.user.school, student_class=3).order_by('roll_number')
-#         if request.user.is_parent:
-#             studentdata = Student.objects.filter(school=request.user.parent.school, student_class=3).order_by('roll_number')
-#         return render(request, 'dashboard/classes/class3.html', {'studentdata' : studentdata})
-
-#     else:
-#         return redirect('notfound') 
-
-# def classFour(request):
-#     if request.user.is_authenticated:
-#         if request.user.is_school:
-#             studentdata = Student.objects.filter(school=request.user.school, student_class=4).order_by('roll_number')
-#         if request.user.is_parent:
-#             studentdata = Student.objects.filter(school=request.user.parent.school, student_class=4).order_by('roll_number')
-#         return render(request, 'dashboard/classes/class4.html', {'studentdata' : studentdata})
-#     else:
-#         return redirect('notfound')
-
-# def classFive(request):
-#     if request.user.is_authenticated:
-#         if request.user.is_school:
-#             studentdata = Student.objects.filter(school=request.user.school, student_class=5).order_by('roll_number')
-#         if request.user.is_parent:
-#             studentdata = Student.objects.filter(school=request.user.parent.school, student_class=5).order_by('roll_number')
-#         return render(request, 'dashboard/classes/class5.html', {'studentdata' : studentdata})
-#     else:
-#         return redirect('notfound')
-
-# def classSix(request):
-#     if request.user.is_authenticated:
-#         if request.user.is_school:
-#             studentdata = Student.objects.filter(school=request.user.school, student_class=6).order_by('roll_number')
-#         if request.user.is_parent:
-#             studentdata = Student.objects.filter(school=request.user.parent.school, student_class=6).order_by('roll_number')
-#         return render(request, 'dashboard/classes/class6.html', {'studentdata' : studentdata})
-#     else:
-#         return redirect('notfound')
-
-# def classSeven(request):
-#     if request.user.is_authenticated:
-#         if request.user.is_school:
-#             studentdata = Student.objects.filter(school=request.user.school, student_class=7).order_by('roll_number')
-#         if request.user.is_parent:
-#             studentdata = Student.objects.filter(school=request.user.parent.school, student_class=7).order_by('roll_number')
-#         return render(request, 'dashboard/classes/class7.html', {'studentdata' : studentdata})
-#     else:
-#         return redirect('notfound')
-
-# def classEight(request):
-#     if request.user.is_authenticated:
-#         if request.user.is_school:
-#             studentdata = Student.objects.filter(school=request.user.school, student_class=8).order_by('roll_number')
-#         if request.user.is_school:
-#             studentdata = Student.objects.filter(school=request.user.parent.school, student_class=8).order_by('roll_number')
-#         return render(request, 'dashboard/classes/class8.html', {'studentdata' : studentdata})
-#     else:
-#         return redirect('notfound')
-
-# def classNine(request):
-#     if request.user.is_authenticated:
-#         if request.user.is_school:
-#             studentdata = Student.objects.filter(school=request.user.school, student_class=9).order_by('roll_number')
-#         if request.user.is_parent:
-#             studentdata = Student.objects.filter(school=request.user.parent.school, student_class=9).order_by('roll_number')
-#         return render(request, 'dashboard/classes/class9.html', {'studentdata' : studentdata})
-#     else:
-#         return redirect('notfound')
-
-# def classTen(request):
-#     if request.user.is_authenticated:
-#         if request.user.is_school:
-#             studentdata = Student.objects.filter(school=request.user.school, student_class=10).order_by('roll_number')
-#         if request.user.is_parent:
-#             studentdata = Student.objects.filter(school=request.user.parent.school, student_class=10).order_by('roll_number')
-#         return render(request, 'dashboard/classes/class10.html', {'studentdata' : studentdata})
-#     else:
-#         return redirect('notfound')
 
 
 #for deleting parents from database
@@ -369,18 +268,20 @@ def uploadattendence(request):
         
         studentclass = request.POST['class']
         studentrollnum = request.POST['rollnum']
+        studentofclass = Class.objects.get(school=request.user.school, class_no=studentclass)
 
         #checks for errors
-        if not Student.objects.filter(roll_number=studentrollnum, student_class=studentclass).exists():
+        if not Student.objects.filter(roll_number=studentrollnum, student_class=studentofclass).exists():
             messages.warning(request, 'No such student exists')
             return redirect('/dashboard/markatten')
 
-        if studentclass != 1 and studentclass != 2 and studentclass != 3 and studentclass != 4 and studentclass != 5 and studentclass != 6 and studentclass != 7 and studentclass != 8 and studentclass != 9 and studentclass != 10:
+        # if studentclass != 1 and studentclass != 2 and studentclass != 3 and studentclass != 4 and studentclass != 5 and studentclass != 6 and studentclass != 7 and studentclass != 8 and studentclass != 9 and studentclass != 10:
+        if not Class.objects.filter(class_no=studentclass, school=request.user.school).exists():
             messages.warning(request, 'Class does not exists')
             return redirect('/dashboard/markatten')
 
 
-        student = Student.objects.get(student_class=studentclass, roll_number=studentrollnum)
+        student = Student.objects.get(student_class=studentofclass, roll_number=studentrollnum)
 
         myattendence = Attendence_Report(Monday=monday, Tuesday=tuesday, Wednesday=wednesday, Thursday=thursday, Friday=friday, Saturday=saturday, student=student)
         myattendence.save()
@@ -506,8 +407,10 @@ def saveresult(request):
         if grandtotal == "":
             grandtotal=None
 
+        studentofclass = Class.objects.get(school=request.user.school, class_no=studentclass)
+
         #checks for errors
-        if not Student.objects.filter(roll_number=studentrollnum, student_class=studentclass).exists():
+        if not Student.objects.filter(roll_number=studentrollnum, student_class=studentofclass).exists():
             messages.warning(request, 'No such student exists')
             return redirect('/dashboard/uploadresults')
 
@@ -621,7 +524,7 @@ def saveresult(request):
 
         
 
-        student = Student.objects.get(student_class=studentclass, roll_number=studentrollnum)
+        student = Student.objects.get(student_class=studentofclass, roll_number=studentrollnum)
 
         myresult = Result_Card(urdu_obtained=urduobtained, urdu_total=urdutotal, english_obtained=englishobtained, english_total=englishtotal,
         maths_obtained=mathsobtained, maths_total=mathstotal, physics_obtained=physicsobtained, physics_total=physicstotal,
@@ -655,7 +558,7 @@ def uploadevent(request):
         description = request.POST["description"]
 
         #checks for errors
-        if not title.isalnum():
+        if not all(x.isalpha() or x.isspace() for x in title):
             messages.warning(request, 'Invalid title')
             return redirect('/dashboard/events')
 
@@ -694,7 +597,7 @@ def classdetails(request, Id):
         studentclass    = Class.objects.get(id=Id)
         students        = Student.objects.filter(student_class=studentclass).order_by('roll_number')
         classdetails    = Id
-        return render(request, 'dashboard/class.html', {'students':students, 'classid':Id})
+        return render(request, 'dashboard/class.html', {'students':students, 'classid':classdetails})
     else:
         return redirect('notfound')
 
@@ -743,7 +646,7 @@ def upcomingtest(request, Id):
     if request.user.is_authenticated:
         myclass            = Class.objects.get(id=Id)
         tests              = Upcoming_Test.objects.filter(for_class=myclass).order_by('-id')
-        return render(request, 'dashboard/upcomingtest.html', {'tests':tests})
+        return render(request, 'dashboard/upcomingtest.html', {'tests':tests, 'classid':Id})
     else:
         return redirect('notfound')
 

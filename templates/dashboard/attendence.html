@@ -5,7 +5,10 @@
 {% block body %}
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Attendence: &emsp; {{student.name}} ({{student.roll_number}}) </h1>
+        <h1 class="h3 mb-0 text-gray-800">Attendence: &emsp; {{student.name}} &emsp; Roll No: &emsp; {{student.roll_number}}</h1>
+        <div class="text-right">
+            <a href="{% url 'classdetails' Id=student.student_class.id %}"><button type="button" class="btn btn-primary text-center">Go Back</button></a>
+        </div>
     </div>
 
     <!-- DataTales Example -->
