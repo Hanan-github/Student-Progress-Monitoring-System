@@ -108,6 +108,14 @@ def contact(request):
         subject = request.POST['subject']
         message = request.POST['message']
 
+        if not all(x.isalpha() or x.isspace() for x in name):
+            messages.warning(request, 'Invalid name')
+            return redirect('/')
+
+        if not subject.isalnum():
+            messages.warning(request, 'Invalid subject')
+            return redirect('/')
+
         contact = Contact(name=name, email=email, subject=subject, message=message)
         contact.save()
 
