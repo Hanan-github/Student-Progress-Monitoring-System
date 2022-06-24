@@ -54,7 +54,7 @@ def handlesignup(request):
             messages.warning(request, 'Registarion No. must only contain numbers!')
             return redirect('/usersignup')
 
-        if len(pass1) < 6:
+        if len(pass1) < 8:
             messages.warning(request, 'Password must contain atleast 6 characters')
             return redirect('/usersignup')
 

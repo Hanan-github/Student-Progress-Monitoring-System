@@ -104,8 +104,8 @@ def handleparentreg(request):
             messages.warning(request, 'Email already exists!')
             return redirect('/dashboard/addprt')
 
-        if len(pass1) < 6:
-            messages.warning(request, 'Password must contain atleast 6 characters')
+        if len(pass1) < 8:
+            messages.warning(request, 'Password must contain atleast 8 characters')
             return redirect('/dashboard/addprt')
 
         if pass1 != pass2:
